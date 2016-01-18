@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ui routing</title>
+    </head>
+    <body ng-app="app">
+         <div ui-view></div>
+         
+         
+         <ul>
+             <li><a ui-sref="state1">STATE 1</a></li>
+             <li><a ui-sref="state2">STATE 2</a></li>
+         </ul>
+         <script src="angular.js"></script>
+         <script src="angular-ui-router.js"></script>
+         <script>
+             var app = angular.module('app',['ui.router']);
+             
+             app.config(function($stateProvider, $urlRouterProvider){
+                 $urlRouterProvider.otherwise("/state1");
+                 
+                 $stateProvider
+                    .state('state1',{
+                        url:'/state1',
+                        templateUrl:'templates/state1.html'
+                    })
+                    .state('state1.list',{
+                        url:'/list',
+                        templateUrl:'templates/state1.list.html',
+                        controller:function($scope){
+                            $scope.items = ["a","list","of","items"];
+                        }
+                    })
+                     .state('state2', {
+                         url: "/state2",
+                         templateUrl: "templates/state2.html"
+                     })
+                     .state('state2.list', {
+                         url: "/list",
+                         templateUrl: "templates/state2.list.html",
+                         controller: function($scope) {
+                             $scope.things = ["A", "Set", "Of", "Things"];
+                         }
+                     });
+             })
+         </script>
+    </body>
+</html>
